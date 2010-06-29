@@ -94,10 +94,10 @@ if __name__ == '__main__':
     if options.app_name:
         repl['APP_NAME'] = options.app_name
     elif len(args) > 0:
-        repl['PROJECT_NAME'] = args[0]
+        repl['APP_NAME'] = args[0]
     
     while not repl['APP_NAME']:
-        repl['PROJECT_NAME'] = raw_input('Application name: ')
+        repl['APP_NAME'] = raw_input('Application name: ')
     
     if options.author:
         repl['AUTHOR'] = options.author
