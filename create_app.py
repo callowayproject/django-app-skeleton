@@ -76,7 +76,7 @@ def main(repl, dest, templ_dir):
 if __name__ == '__main__':
     from optparse import OptionParser
     parser = OptionParser()
-    parser.add_option("-a", "--author", dest="app_name", help="The name of the author.")
+    parser.add_option("-a", "--author", dest="author", help="The name of the author.")
     parser.add_option("-n", "--name", dest="app_name", help="The name of the application.")
     parser.add_option("-v", "--virtenv", dest="virtenv", help="The name of the virtualenv.")
     parser.add_option("-d", "--dest", dest="destination", help="Where to put the new application.")
