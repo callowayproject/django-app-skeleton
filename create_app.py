@@ -85,6 +85,7 @@ if __name__ == '__main__':
     
     repl = {
         'APP_NAME':None,
+        'AUTHOR': None,
     }
     dest_dir = None
     templ_dir = None
