@@ -113,12 +113,12 @@ if __name__ == '__main__':
     while not dest_dir:
         dest_dir = raw_input('Destination directory [%s]: ' % (os.getcwd(),)) or os.getcwd()
     dest_dir =  os.path.realpath(os.path.expanduser(dest_dir))
-    dest = os.path.join(dest_dir, repl['PROJECT_NAME'])
+    dest = os.path.join(dest_dir, repl['APP_NAME'])
 
     if options.template:
         templ_dir = options.template
 
-    default = os.path.abspath(os.path.join(os.path.dirname(__file__), 'skel_tmpl'))
+    default = os.path.abspath(os.path.join(os.path.dirname(__file__), 'skel'))
     while not templ_dir:
         templ_dir = raw_input('Application template directory [%s]: ' % default) or default
     templ_dir = os.path.realpath(os.path.expanduser(templ_dir))
