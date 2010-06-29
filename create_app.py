@@ -76,7 +76,7 @@ def main(repl, dest, templ_dir):
 if __name__ == '__main__':
     from optparse import OptionParser
     parser = OptionParser()
-    
+    parser.add_option("-a", "--author", dest="app_name", help="The name of the author.")
     parser.add_option("-n", "--name", dest="app_name", help="The name of the application.")
     parser.add_option("-v", "--virtenv", dest="virtenv", help="The name of the virtualenv.")
     parser.add_option("-d", "--dest", dest="destination", help="Where to put the new application.")
@@ -99,13 +99,18 @@ if __name__ == '__main__':
     while not repl['APP_NAME']:
         repl['PROJECT_NAME'] = raw_input('Application name: ')
     
+    if options.author:
+        repl['AUTHOR'] = options.author
+    while not repl['AUTHOR']:
+        repl['AUTHOR'] = raw_input('Author: [%s]' % cur_user) or cur_user
+    
     repl['SECRET_KEY'] = ''.join([random.choice(CHARS) for i in xrange(50)])
     
     if options.destination:
         dest_dir = options.destination
     
     while not dest_dir:
-        dest_dir = raw_input('Destination directory (currently at %s): ' % (os.getcwd(),)) or os.getcwd()
+        dest_dir = raw_input('Destination directory [%s]: ' % (os.getcwd(),)) or os.getcwd()
     dest_dir =  os.path.realpath(os.path.expanduser(dest_dir))
     dest = os.path.join(dest_dir, repl['PROJECT_NAME'])
 
