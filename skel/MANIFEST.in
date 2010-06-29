@@ -1,0 +1,9 @@
+recursive-include doc_src *
+recursive-include docs *
+
+recursive-include $$$$APP_NAME$$$$/media *
+recursive-include $$$$APP_NAME$$$$/templates *
+
+include LICENSE
+include README
+include *.txt
