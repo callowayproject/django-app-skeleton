@@ -1,8 +1,8 @@
 recursive-include doc_src *
 recursive-include docs *
 
-recursive-include $$$$APP_NAME$$$$/media *
-recursive-include $$$$APP_NAME$$$$/templates *
+recursive-include $$$$PKG_NAME$$$$/media *
+recursive-include $$$$PKG_NAME$$$$/templates *
 
 include LICENSE
 include README
