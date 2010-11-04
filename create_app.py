@@ -55,31 +55,31 @@ def main(repl, dest, templ_dir):
             open(dest_fn, 'w').write(data)
             os.chmod(dest_fn, os.stat(source_fn)[0])
     
-    print "Making the virtual environment (%s)..." % repl['virtenv']
+    print "Making the virtual environment (%s)..." % repl['VIRTENV']
     create_env_cmds = [
         'source virtualenvwrapper.sh', 
         'cd %s' % dest,
-        'mkvirtualenv --no-site-packages --distribute %s' % repl['virtenv'],
+        'mkvirtualenv --no-site-packages --distribute %s' % repl['VIRTENV'],
         'easy_install pip'
     ]
     create_pa_cmd = [
         'source virtualenvwrapper.sh',
         'cat > $WORKON_HOME/%s/bin/postactivate '\
         '<<END\n#!/bin/bash/\ncd %s\nEND\n'\
-        'chmod +x $WORKON_HOME/%s/bin/postactivate' % (repl['virtenv'], dest,repl['virtenv'])
+        'chmod +x $WORKON_HOME/%s/bin/postactivate' % (repl['VIRTENV'], dest,repl['VIRTENV'])
     ]
     subprocess.call([';'.join(create_env_cmds)], env=os.environ, executable='/bin/bash', shell=True)
     subprocess.call([';'.join(create_pa_cmd)], env=os.environ, executable='/bin/bash', shell=True)
     
-    print "Now type: workon %s" % repl['virtenv']
+    print "Now type: workon %s" % repl['VIRTENV']
 
 if __name__ == '__main__':
     from optparse import OptionParser
     parser = OptionParser()
     parser.add_option("-a", "--author", dest="author", help="The name of the author.")
     parser.add_option("-n", "--name", dest="app_name", help="The name of the application, like 'django-coolapp'.")
-    parser.add_option("-p", "--author", dest="pkg_name", help="The name of the installed package, like 'coolapp'.")
-    parser.add_option("-v", "--virtenv", dest="virtenv", help="The name of the virtualenv.")
+    parser.add_option("-p", "--package", dest="pkg_name", help="The name of the installed package, like 'coolapp'.")
+    parser.add_option("-v", "--VIRTENV", dest="VIRTENV", help="The name of the virtualenv.")
     parser.add_option("-d", "--dest", dest="destination", help="Where to put the new application. Relative paths are recognized.")
     parser.add_option("-t", "--template", dest="template", help="The application template to use as a basis for the new application.")
     (options, args) = parser.parse_args()
@@ -106,12 +106,12 @@ if __name__ == '__main__':
         repl['PKG_NAME'] = options.pkg_name
     while not repl['PKG_NAME']:
         default_name = repl['APP_NAME'].replace('django-', '')
-        repl['PKG_NAME'] = raw_input('Package Name: [%s]' % default_name) or default_name
+        repl['PKG_NAME'] = raw_input('Package Name [%s]:' % default_name) or default_name
     
     if options.author:
         repl['AUTHOR'] = options.author
     while not repl['AUTHOR']:
-        repl['AUTHOR'] = raw_input('Author: [%s]' % cur_user) or cur_user
+        repl['AUTHOR'] = raw_input('Author [%s]:' % cur_user) or cur_user
     
     repl['SECRET_KEY'] = ''.join([random.choice(CHARS) for i in xrange(50)])
     
@@ -132,11 +132,12 @@ if __name__ == '__main__':
     templ_dir = os.path.realpath(os.path.expanduser(templ_dir))
     if templ_dir[-1] != '/':
         templ_dir = templ_dir + "/"
-    if options.virtenv:
-        repl['virtenv'] = options.virtenv
-
-    repl['virtenv'] = None
-    while not repl['virtenv']:
-        repl['virtenv'] = raw_input('Virtual environment name (e.g. %s): ' % repl['APP_NAME']) or repl['APP_NAME']
+    
+    if options.VIRTENV:
+        repl['VIRTENV'] = options.VIRTENV
+    else:
+        repl['VIRTENV'] = None
+    while not repl['VIRTENV']:
+        repl['VIRTENV'] = raw_input('Virtual environment name [%s]: ' % repl['APP_NAME']) or repl['APP_NAME']
 
     main(repl, dest, templ_dir)
