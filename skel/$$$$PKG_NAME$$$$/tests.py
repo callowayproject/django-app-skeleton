@@ -1,9 +1,9 @@
 from django.test import TestCase
 
 
-class $$$$APP_NAME$$$$Test(TestCase):
+class $$$$PKG_NAME$$$$Test(TestCase):
     """
     Tests for $$$$APP_NAME$$$$
     """
-    def test_$$$$APP_NAME$$$$(self):
+    def test_$$$$PKG_NAME$$$$(self):
         pass
