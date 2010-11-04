@@ -77,14 +77,16 @@ if __name__ == '__main__':
     from optparse import OptionParser
     parser = OptionParser()
     parser.add_option("-a", "--author", dest="author", help="The name of the author.")
-    parser.add_option("-n", "--name", dest="app_name", help="The name of the application.")
+    parser.add_option("-n", "--name", dest="app_name", help="The name of the application, like 'django-coolapp'.")
+    parser.add_option("-p", "--author", dest="pkg_name", help="The name of the installed package, like 'coolapp'.")
     parser.add_option("-v", "--virtenv", dest="virtenv", help="The name of the virtualenv.")
-    parser.add_option("-d", "--dest", dest="destination", help="Where to put the new application.")
+    parser.add_option("-d", "--dest", dest="destination", help="Where to put the new application. Relative paths are recognized.")
     parser.add_option("-t", "--template", dest="template", help="The application template to use as a basis for the new application.")
     (options, args) = parser.parse_args()
     
     repl = {
-        'APP_NAME':None,
+        'APP_NAME': None,
+        'PKG_NAME': None,
         'AUTHOR': None,
     }
     dest_dir = None
@@ -99,6 +101,12 @@ if __name__ == '__main__':
     
     while not repl['APP_NAME']:
         repl['APP_NAME'] = raw_input('Application name: ')
+    
+    if options.pkg_name:
+        repl['PKG_NAME'] = options.pkg_name
+    while not repl['PKG_NAME']:
+        default_name = repl['APP_NAME'].replace('django-', '')
+        repl['PKG_NAME'] = raw_input('Package Name: [%s]' % default_name) or default_name
     
     if options.author:
         repl['AUTHOR'] = options.author
