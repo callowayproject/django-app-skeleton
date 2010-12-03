@@ -77,3 +77,11 @@ The variables are referenced by surrounding them with ``$$$$``\ , such as ``$$$$
 	    url = '',
 	    author = '$$$$AUTHOR$$$$',
 
+Contributors
+============
+
+Eric Florenzano
+Corey Oordt
+Jose Soares
+Justin Quick
+Adam Patterson
