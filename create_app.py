@@ -105,7 +105,7 @@ if __name__ == '__main__':
     if options.pkg_name:
         repl['PKG_NAME'] = options.pkg_name
     while not repl['PKG_NAME']:
-        default_name = repl['APP_NAME'].replace('django-', '')
+        default_name = repl['APP_NAME'].replace('django-', '').replace('-','_')
         repl['PKG_NAME'] = raw_input('Package Name [%s]:' % default_name) or default_name
     
     if options.author:
