@@ -9,6 +9,13 @@ def read_file(filename):
         return open(filepath).read()
     except IOError:
         return ''
+    
+def get_readme():
+    """Return the README file contents. Supports text,rst, and markdown"""
+    for name in ('README','README.rst','README.md'):
+        if os.path.exists(name):
+            return read_file(name)
+    return ''
 
 # Use the docstring of the __init__ file to be the description
 DESC = " ".join(__import__('$$$$PKG_NAME$$$$').__doc__.splitlines()).strip()
@@ -16,14 +23,14 @@ DESC = " ".join(__import__('$$$$PKG_NAME$$$$').__doc__.splitlines()).strip()
 setup(
     name = "$$$$APP_NAME$$$$",
     version = __import__('$$$$PKG_NAME$$$$').get_version().replace(' ', '-'),
-    url = '',
+    url = '$$$$URL$$$$',
     author = '$$$$AUTHOR$$$$',
-    author_email = '',
+    author_email = '$$$$AUTHOR_EMAIL$$$$',
     description = DESC,
-    long_description = read_file('README'),
+    long_description = get_readme(),
     packages = find_packages(),
     include_package_data = True,
-    install_requires=read_file('requirements.txt'),
+    install_requires = read_file('requirements.txt'),
     classifiers = [
         'License :: OSI Approved :: Apache Software License',
         'Framework :: Django',

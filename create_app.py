@@ -77,6 +77,8 @@ if __name__ == '__main__':
     from optparse import OptionParser
     parser = OptionParser()
     parser.add_option("-a", "--author", dest="author", help="The name of the author.")
+    parser.add_option("-e", "--author-email", dest="author_email", help="The email of the author.")
+    parser.add_option("-u", "--url", dest="url", help="The URL of the project page.")
     parser.add_option("-n", "--name", dest="app_name", help="The name of the application, like 'django-coolapp'.")
     parser.add_option("-p", "--package", dest="pkg_name", help="The name of the installed package, like 'coolapp'.")
     parser.add_option("-v", "--VIRTENV", dest="VIRTENV", help="The name of the virtualenv.")
@@ -88,6 +90,8 @@ if __name__ == '__main__':
         'APP_NAME': None,
         'PKG_NAME': None,
         'AUTHOR': None,
+        'AUTHOR_EMAIL': None,
+        'URL': None,
     }
     dest_dir = None
     templ_dir = None
@@ -112,6 +116,16 @@ if __name__ == '__main__':
         repl['AUTHOR'] = options.author
     while not repl['AUTHOR']:
         repl['AUTHOR'] = raw_input('Author [%s]:' % cur_user) or cur_user
+
+    if options.author:
+        repl['AUTHOR_EMAIL'] = options.author_email
+    while not repl['AUTHOR_EMAIL']:
+        repl['AUTHOR_EMAIL'] = raw_input('Author\'s Email: ')
+    
+    if options.url:
+        repl['URL'] = options.url
+    while not repl['URL']:
+        repl['URL'] = raw_input('Project Page URL: ')
     
     repl['SECRET_KEY'] = ''.join([random.choice(CHARS) for i in xrange(50)])
     
