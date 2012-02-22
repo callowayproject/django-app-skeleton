@@ -152,6 +152,6 @@ if __name__ == '__main__':
     else:
         repl['VIRTENV'] = None
     while not repl['VIRTENV']:
-        repl['VIRTENV'] = raw_input('Virtual environment name [%s]: ' % repl['APP_NAME']) or repl['APP_NAME']
+        repl['VIRTENV'] = raw_input('Virtual environment name [%s]: ' % repl['PKG_NAME']) or repl['PKG_NAME']
 
     main(repl, dest, templ_dir)

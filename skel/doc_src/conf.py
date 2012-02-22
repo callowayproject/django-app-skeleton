@@ -40,14 +40,14 @@ master_doc = 'index'
 
 # General information about the project.
 project = u'$$$$APP_NAME$$$$'
-copyright = u'2010, $$$$AUTHOR$$$$'
+copyright = u'2012, $$$$AUTHOR$$$$'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
 # The short X.Y version.
-version = $$$$PKG_NAME$$$$.get_version()
+version = $$$$PKG_NAME$$$$.get_version(short=True)
 # The full version, including alpha/beta/rc tags.
 release = $$$$PKG_NAME$$$$.get_version()
 
