@@ -7,3 +7,5 @@ recursive-include $$$$PKG_NAME$$$$/templates *
 include LICENSE
 include README
 include *.txt
+
+prune example/
