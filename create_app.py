@@ -142,7 +142,8 @@ if __name__ == '__main__':
     pkg_name = repl['PKG_NAME']
     app_name = repl['APP_NAME'] or pkg_name.replace('django-', '')
     while not repl['APP_NAME']:
-        repl['APP_NAME'] = raw_input('App name [{0}]: '.format(app_name))
+        repl['APP_NAME'] = raw_input(
+            'App name [{0}]: '.format(app_name)) or app_name
 
     # Author name
     if options.pkg_author:
@@ -190,6 +191,6 @@ if __name__ == '__main__':
     while not repl['VENV']:
         repl['VENV'] = raw_input(
             'Virtual environment name [%s]: ' % (
-                repl['PKG_NAME']) or repl['PKG_NAME'])
+                repl['PKG_NAME'])) or repl['PKG_NAME']
 
     main(repl, dest, templ_dir)
