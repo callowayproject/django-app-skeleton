@@ -36,11 +36,12 @@ BLACKLIST = (
     '.hg',
 )
 
-
 def replace(repl, text):
+    text = text.replace('/app_name', '/{0}'.format(repl['APP_NAME']))
     text = text.replace('/gitignore', '/.gitignore')
+
     for key, value in repl.iteritems():
-        text = text.replace('$$$$%s$$$$' % (key,), value)
+        text = text.replace('{{%s}}' % (key.lower(),), value)
     return text
 
 
@@ -70,104 +71,106 @@ def main(repl, dest, templ_dir):
             open(dest_fn, 'w').write(data)
             os.chmod(dest_fn, os.stat(source_fn)[0])
 
-    print 'Making the virtual environment (%s)...' % repl['VIRTENV']
+    print 'Making the virtual environment (%s)...' % repl['VENV']
     create_env_cmds = [
         'source virtualenvwrapper.sh',
         'cd %s' % dest,
-        'mkvirtualenv --no-site-packages --distribute %s' % repl['VIRTENV'],
+        'mkvirtualenv --no-site-packages --distribute %s' % repl['VENV'],
         'easy_install pip'
     ]
     create_pa_cmd = [
         'source virtualenvwrapper.sh',
         'cat > $WORKON_HOME/%s/bin/postactivate'\
         '<<END\n#!/bin/bash/\ncd %s\nEND\n'\
-        'chmod +x $WORKON_HOME/%s/bin/postactivate' % (repl['VIRTENV'],
+        'chmod +x $WORKON_HOME/%s/bin/postactivate' % (repl['VENV'],
                                                        dest,
-                                                       repl['VIRTENV'])
+                                                       repl['VENV'])
     ]
     subprocess.call([';'.join(create_env_cmds)], env=os.environ,
                     executable='/bin/bash', shell=True)
     subprocess.call([';'.join(create_pa_cmd)], env=os.environ,
                     executable='/bin/bash', shell=True)
 
-    print 'Now type: workon %s' % repl['VIRTENV']
+    print 'Now type: workon %s' % repl['VENV']
 
 if __name__ == '__main__':
     from optparse import OptionParser
     parser = OptionParser()
-    parser.add_option('-a', '--author', dest='author',
+    parser.add_option('-a', '--author', dest='pkg_author',
                       help='The name of the author.')
-    parser.add_option('-e', '--author-email', dest='author_email',
+    parser.add_option('-e', '--author-email', dest='pkg_author_email',
                       help='The email of the author.')
-    parser.add_option('-u', '--url', dest='url',
+    parser.add_option('-u', '--url', dest='pkg_url',
                       help='The URL of the project page.')
     parser.add_option('-n', '--name', dest='app_name',
                       help='The name of the application, i.e. django-myapp')
     parser.add_option('-p', '--package', dest='pkg_name',
                       help='The name of the installed package, i.e. myapp')
-    parser.add_option('-v', '--VIRTENV', dest='VIRTENV',
+    parser.add_option('-v', '--VIRTENV', dest='venv',
                       help='The name of the virtualenv.')
     parser.add_option('-d', '--dest', dest='destination',
                       help='Where to put the new application.')
     parser.add_option('-t', '--template', dest='template',
-                      help='''The application template to use as a basis for
-                              the new application.''')
+                      help='The application template to use as a basis for '\
+                           'the new application.')
     (options, args) = parser.parse_args()
 
     repl = {
         'APP_NAME': None,
         'PKG_NAME': None,
-        'AUTHOR': None,
-        'AUTHOR_EMAIL': None,
-        'URL': None,
+        'PKG_AUTHOR': None,
+        'PKG_AUTHOR_EMAIL': None,
+        'PKG_URL': None,
+        'VENV': None,
+        'SECRET_KEY': ''.join([random.choice(CHARS) for i in xrange(50)])
     }
     dest_dir = None
     templ_dir = None
 
     cur_user = os.getlogin()
 
-    if options.app_name:
-        repl['APP_NAME'] = options.app_name
-    elif len(args) > 0:
-        repl['APP_NAME'] = args[0]
-
-    while not repl['APP_NAME']:
-        repl['APP_NAME'] = raw_input('Application name: ')
-
+    # Package name i.e. django-package
     if options.pkg_name:
         repl['PKG_NAME'] = options.pkg_name
     while not repl['PKG_NAME']:
-        default_name = repl['APP_NAME'].replace(
-            'django-', '').replace('-', '_')
-        repl['PKG_NAME'] = raw_input(
-            'Package Name [%s]:' % default_name) or default_name
+        repl['PKG_NAME'] = raw_input('Package Name: ')
 
-    if options.author:
-        repl['AUTHOR'] = options.author
-    while not repl['AUTHOR']:
-        repl['AUTHOR'] = raw_input(
+    # App name i.e. package
+    if options.app_name:
+        repl['APP_NAME'] = options.app_name
+
+    pkg_name = repl['PKG_NAME']
+    app_name = repl['APP_NAME'] or pkg_name.replace('django-', '')
+    while not repl['APP_NAME']:
+        repl['APP_NAME'] = raw_input('App name [{0}]: '.format(app_name))
+
+    # Author name
+    if options.pkg_author:
+        repl['PKG_AUTHOR'] = options.pkg_author
+    while not repl['PKG_AUTHOR']:
+        repl['PKG_AUTHOR'] = raw_input(
             'Author [%s]:' % cur_user) or cur_user
 
-    if options.author:
-        repl['AUTHOR_EMAIL'] = options.author_email
-    while not repl['AUTHOR_EMAIL']:
-        repl['AUTHOR_EMAIL'] = raw_input('Author\'s Email: ')
+    if options.pkg_author_email:
+        repl['PKG_AUTHOR_EMAIL'] = options.pkg_author_email
+    while not repl['PKG_AUTHOR_EMAIL']:
+        repl['PKG_AUTHOR_EMAIL'] = raw_input('Author\'s Email: ')
 
-    if options.url:
-        repl['URL'] = options.url
-    while not repl['URL']:
-        repl['URL'] = raw_input('Project Page URL: ')
-
-    repl['SECRET_KEY'] = ''.join([random.choice(CHARS) for i in xrange(50)])
+    # Package Url
+    if options.pkg_url:
+        repl['PKG_URL'] = options.pkg_url
+    while not repl['PKG_URL']:
+        repl['PKG_URL'] = raw_input('Project Page URL: ')
 
     if options.destination:
         dest_dir = options.destination
 
+    # Destination directory
     while not dest_dir:
         dest_dir = raw_input(
             'Destination directory [%s]: ' % (os.getcwd(),)) or os.getcwd()
     dest_dir = os.path.realpath(os.path.expanduser(dest_dir))
-    dest = os.path.join(dest_dir, repl['APP_NAME'])
+    dest = os.path.join(dest_dir, repl['PKG_NAME'])
 
     if options.template:
         templ_dir = options.template
@@ -180,12 +183,12 @@ if __name__ == '__main__':
     if templ_dir[-1] != '/':
         templ_dir = templ_dir + "/"
 
-    if options.VIRTENV:
-        repl['VIRTENV'] = options.VIRTENV
+    if options.venv:
+        repl['VENV'] = options.venv
     else:
-        repl['VIRTENV'] = None
-    while not repl['VIRTENV']:
-        repl['VIRTENV'] = raw_input(
+        repl['VENV'] = None
+    while not repl['VENV']:
+        repl['VENV'] = raw_input(
             'Virtual environment name [%s]: ' % (
                 repl['PKG_NAME']) or repl['PKG_NAME'])
 
