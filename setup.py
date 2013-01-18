@@ -31,6 +31,7 @@ setup(
     author='Calloway Project',
     author_email='webmaster@callowayproject.com',
     description=DESC,
+    long_description=get_readme(),
     packages=find_packages(),
     include_package_data=True,
     classifiers=[
