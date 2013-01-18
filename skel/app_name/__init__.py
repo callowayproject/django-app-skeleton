@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-$$$$APP_NAME$$$$
+{{app_name}}
 """
 __version_info__ = {
     'major': 0,
