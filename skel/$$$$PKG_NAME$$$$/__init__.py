@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 $$$$APP_NAME$$$$
 """
@@ -15,7 +17,8 @@ def get_version(short=False):
     if __version_info__['micro']:
         vers.append(".%(micro)i" % __version_info__)
     if __version_info__['releaselevel'] != 'final' and not short:
-        vers.append('%s%i' % (__version_info__['releaselevel'][0], __version_info__['serial']))
+        vers.append('%s%i' % (
+            __version_info__['releaselevel'][0], __version_info__['serial']))
     return ''.join(vers)
 
 __version__ = get_version()
