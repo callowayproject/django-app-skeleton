@@ -20,21 +20,20 @@ def get_readme():
     return ''
 
 # Use the docstring of the __init__ file to be the description
-DESC = " ".join(__import__('$$$$PKG_NAME$$$$').__doc__.splitlines()).strip()
+DESC = " ".join(__import__('{{app_name}}').__doc__.splitlines()).strip()
 
 setup(
-    name="$$$$APP_NAME$$$$",
-    version=__import__('$$$$PKG_NAME$$$$').get_version().replace(' ', '-'),
-    url='$$$$URL$$$$',
-    author='$$$$AUTHOR$$$$',
-    author_email='$$$$AUTHOR_EMAIL$$$$',
+    name="{{pkg_name}}",
+    version=__import__('{{app_name}}').get_version().replace(' ', '-'),
+    url='{{pkg_url}}',
+    author='{{pkg_author}}',
+    author_email='{{pkg_author_email}}',
     description=DESC,
     long_description=get_readme(),
     packages=find_packages(),
     include_package_data=True,
     install_requires=read_file('requirements.txt'),
     classifiers=[
-        'License :: OSI Approved :: Apache Software License',
         'Framework :: Django',
     ],
 )
