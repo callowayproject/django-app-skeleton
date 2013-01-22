@@ -250,7 +250,7 @@ def main(options):
 
     # Virtualenv
     opts['USE_VENV'] = prompt('use_venv', 'Use Virtualenv', 'n')
-    if opts['USE_VENV'] in ['y', 'yes', '1']:
+    if opts['USE_VENV'].lower() in ['y', 'yes', '1']:
         opts['VENV'] = prompt('venv', 'Virtualenv Name', opts['PKG_NAME'])
         mk_virtual_env(opts['VENV'], opts['DEST_DIR'])
 
@@ -268,13 +268,15 @@ if __name__ == '__main__':
                       help='The name of the application, i.e. django-myapp')
     parser.add_option('-p', '--package', dest='pkg_name',
                       help='The name of the installed package, i.e. myapp')
-    parser.add_option('-v', '--VIRTENV', dest='venv',
+    parser.add_option('-v', '--virtenv', dest='venv',
                       help='The name of the virtualenv.')
     parser.add_option('-d', '--dest', dest='destination',
                       help='Where to put the new application.')
     parser.add_option('-t', '--template', dest='template',
                       help='The application template to use as a basis for '\
                            'the new application.')
+    parser.add_option('-i', '--use-venv', dest='use_venv',
+                      help='Wheater or not to create the virtuelenv')
     (options, args) = parser.parse_args()
 
     sys.exit(main(options))
