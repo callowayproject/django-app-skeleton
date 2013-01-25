@@ -37,7 +37,7 @@ of the values are present, no prompt will be displayed for its value.
 -a, --author
 	The name of the author.
 
--e --email
+-e, --email
     The email of the author
 
 -p, --package
@@ -46,7 +46,7 @@ of the values are present, no prompt will be displayed for its value.
 -n, --name
 	The name of the application, like 'coolapp'.
 
--i --use-venv
+-i, --use-venv
     Wheater or not to create a virtualenv
 
 -v, --virtenv
@@ -90,23 +90,19 @@ for file names and within text files.
 	The name supplied by ``-n``\ , ``--name``\ , or the answer to *Application name*.
 
 `pkg_name`
-	The name supplied by ``-p``\ , ``--package``\ , or the answer to
-    *Package name*. The default is the ``APP_NAME`` without ``django-``\ .
+	The name supplied by ``-p``\ , ``--package``\ , or the answer to *Package name*. The default is the ``APP_NAME`` without ``django-``\ .
 
 `pkg_author`
-	The value supplied by ``-a``\ , ``--author``\ , or the answer to
-    *Author*. The default is the current user name.
+	The value supplied by ``-a``\ , ``--author``\ , or the answer to *Author*. The default is the current user name.
 
 `pkg_author_email`
-    The value supplied by ``-e``\, ``--author_email``\, or the answer to
-    *Author Email*.
+    The value supplied by ``-e``\, ``--author_email``\, or the answer to *Author Email*.
 
 `secret_key`
 	A randomly generated string of characters used in the ``settings.py`` file.
 
 `venv`
-	The name supplied by ``-v``\ , ``--virtenv``\ , or the answer to
-    *Virtual environment name*. The default is the ``APP_NAME``\ .
+	The name supplied by ``-v``\ , ``--virtenv``\ , or the answer to *Virtual environment name*. The default is the ``APP_NAME``\ .
 
 The variables are referenced by surrounding them with ``{{``\ , such as
 ``{{app_name}}``\ . Here is an example from the setup.py file::
@@ -121,7 +117,22 @@ The variables are referenced by surrounding them with ``{{``\ , such as
 
     Previously `$$$$` was used, this was changed to be `{{` in order for the
     template, i.e. `/skel/app_name` to be usable with
-    `django-admin.py create_app --template=...`
+    `django-admin.py create_app --template=...`, see below
+
+Using just the app skeleton
+===========================
+
+If all you want is the `app` skeleton, you can use the following command::
+
+    $ django-admin.py startapp --template=/path/to/django-app-skeleton/skel/app_name
+
+.. note::
+
+    Please note, that our `skel` is a **package** skeletion, and django's
+    `startapp` command expects a **app** skeletion. Therefore the path above
+    points to just the app skeleton.
+
+
 
 Contributors
 ============
