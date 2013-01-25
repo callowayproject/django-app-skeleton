@@ -78,6 +78,20 @@ configuration.
     use_venv = n
 
 
+Using just the app skeleton
+===========================
+
+If all you want is the `app` skeleton, you can use the following command::
+
+    $ django-admin.py startapp --template=/path/to/django-app-skeleton/skel/app_name
+
+.. note::
+
+    Our `skeleton` is a **package** skeletion, and django's
+    `startapp` command expects a **app** skeletion. Therefore the path above
+    points to just out **app** skeleton.
+
+
 Variable Substitution
 =====================
 
@@ -123,21 +137,6 @@ The variables are referenced by surrounding them with ``{{``\ , such as
     In addition to `{{ .. }}`, anything with the name folder name `app_name` is
     also replaced with its correct value. This is also so make the **app**
     skeleton compatible with django's `startapp` command.
-
-
-Using just the app skeleton
-===========================
-
-If all you want is the `app` skeleton, you can use the following command::
-
-    $ django-admin.py startapp --template=/path/to/django-app-skeleton/skel/app_name
-
-.. note::
-
-    Our `skeleton` is a **package** skeletion, and django's
-    `startapp` command expects a **app** skeletion. Therefore the path above
-    points to just out **app** skeleton.
-
 
 
 Contributors
