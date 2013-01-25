@@ -2,7 +2,7 @@
 Generating a Packagable Django Application
 ==========================================
 
-The ``create_app.py`` uses several variables to replace within a "template"
+The ``create_pkg.py`` uses several variables to replace within a "template"
 directory. The default template directory is included and called "skel".
 
 Running the script
@@ -11,7 +11,7 @@ Running the script
 The script is interactive, although you can specify some options when you
 call it. Calling the script is as easy as::
 
-	python create_app.py
+	python create_pkg.py
 
 and the script will ask you for everything it needs.
 
@@ -132,7 +132,7 @@ The variables are referenced by surrounding them with ``{{``\ , such as
 
     Previously `$$$$` was used, this was changed to be `{{` in order for the
     template, i.e. `/skel/app_name` to be usable with
-    `django-admin.py create_app --template=...`, see below.
+    `django-admin.py startapp --template=...`, see below.
 
     In addition to `{{ .. }}`, anything with the name folder name `app_name` is
     also replaced with its correct value. This is also so make the **app**
