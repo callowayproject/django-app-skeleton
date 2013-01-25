@@ -56,8 +56,7 @@ of the values are present, no prompt will be displayed for its value.
 	Where to put the new package. Relative paths are recognized.
 
 -t, --template
-	The package template to use as a basis for the new application.
-    Relative paths are recognized.
+	The package template to use as a basis for the new application. Relative paths are recognized.
 
 
 Default Command options
@@ -83,7 +82,9 @@ Variable Substitution
 =====================
 
 The script creates several substitution variables that it uses to substitute
-for file names and within text files.
+for file names and within text files. If you want to create a custom package
+template, below are the possible variables supplied to each file in the
+skeleton.
 
 
 `app_name`
@@ -117,7 +118,12 @@ The variables are referenced by surrounding them with ``{{``\ , such as
 
     Previously `$$$$` was used, this was changed to be `{{` in order for the
     template, i.e. `/skel/app_name` to be usable with
-    `django-admin.py create_app --template=...`, see below
+    `django-admin.py create_app --template=...`, see below.
+
+    In addition to `{{ .. }}`, anything with the name folder name `app_name` is
+    also replaced with its correct value. This is also so make the **app**
+    skeleton compatible with django's `startapp` command.
+
 
 Using just the app skeleton
 ===========================
@@ -128,17 +134,17 @@ If all you want is the `app` skeleton, you can use the following command::
 
 .. note::
 
-    Please note, that our `skel` is a **package** skeletion, and django's
+    Our `skeleton` is a **package** skeletion, and django's
     `startapp` command expects a **app** skeletion. Therefore the path above
-    points to just the app skeleton.
+    points to just out **app** skeleton.
 
 
 
 Contributors
 ============
 
-Eric Florenzano
-Corey Oordt
-Jose Soares
-Justin Quick
-Adam Patterson
+* Eric Florenzano
+* Corey Oordt
+* Jose Soares
+* Justin Quick
+* Adam Patterson
