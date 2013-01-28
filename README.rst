@@ -12,13 +12,12 @@ Change Log
 ==========
 
 - **1.0**
-
-* Default configuration file `.djas`
-* Virtualenv creation is now optional
-    * Added command-line argument for using virtualenv
-* `create_app` was renamed to `create_pkg`
-* App skeleton is compatible with django's `startapp` command
-* Bunch of code tweaks, should be easier to read and debug
+    * Default configuration file `.djas`
+    * Virtualenv creation is now optional
+        * Added command-line argument for using virtualenv
+    * `create_app` was renamed to `create_pkg`
+    * App skeleton is compatible with django's `startapp` command
+    * Bunch of code tweaks, should be easier to read and debug
 
 See all the changes: https://github.com/callowayproject/django-app-skeleton/pull/6
 
