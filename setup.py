@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""django app skeleton setup"""
+
 import os
 from setuptools import setup, find_packages
 
@@ -19,20 +23,17 @@ def get_readme():
             return read_file(name)
     return ''
 
-# Use the docstring of the __init__ file to be the description
-DESC = " ".join(__import__('{{app_name}}').__doc__.splitlines()).strip()
-
+DESC = 'A basic skeleton and script to make a packageable django application'
 setup(
-    name="{{pkg_name}}",
-    version=__import__('{{app_name}}').get_version().replace(' ', '-'),
-    url='{{pkg_url}}',
-    author='{{pkg_author}}',
-    author_email='{{pkg_author_email}}',
+    name="django-app-skeleton",
+    version='1.0',
+    url='https://github.com/callowayproject/django-app-skeleton',
+    author='Calloway Project',
+    author_email='webmaster@callowayproject.com',
     description=DESC,
     long_description=get_readme(),
     packages=find_packages(),
     include_package_data=True,
-    install_requires=read_file('requirements.txt'),
     classifiers=[
         'Framework :: Django',
     ],
