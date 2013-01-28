@@ -8,6 +8,11 @@ directory. The default template directory is included and called "skel".
 Running the script
 ==================
 
+First, clone this repo or use `pip` to install the package::
+
+    $ pip install django-app-skeleton
+
+
 The script is interactive, although you can specify some options when you
 call it. Calling the script is as easy as::
 
