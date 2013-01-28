@@ -11,7 +11,7 @@ Django App Skeleton
 Change Log
 ==========
 
-- **1.0**
+* **1.0**
     * Default configuration file `.djas`
     * Virtualenv creation is now optional
         * Added command-line argument for using virtualenv
