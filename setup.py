@@ -35,7 +35,6 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     classifiers=[
-        'License :: OSI Approved :: Apache Software License',
         'Framework :: Django',
     ],
 )
