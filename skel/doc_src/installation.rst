@@ -6,12 +6,12 @@ Installation is easy using ``pip`` or ``easy_install``.
 
 .. code-block:: bash
 
-	pip install $$$$APP_NAME$$$$
+	pip install {{pkg_name}}
 
 or
 .. code-block:: bash
 
-	easy_install $$$$APP_NAME$$$$
+	easy_install {{pkg_name}}
 
 Dependencies
 ************
