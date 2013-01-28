@@ -1,0 +1,10 @@
+include create_pkg.py
+
+include skel/CHANGELOG
+include skel/LICENSE
+include skel/MANIFEST.in
+include skel/gitignore
+
+recursive-include skel *.py *.rst *.html *.css *.js *.png *.gif *.html *.css *.js *.png *.gif *.txt *.bat
+
+include skel/doc_src/Makefile
