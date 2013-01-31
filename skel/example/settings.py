@@ -1,4 +1,4 @@
-# Django settings for example project.
+># Django settings for example project.
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -81,7 +81,7 @@ STATICFILES_FINDERS = (
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'g2_39yupn*6j4p*cg2%w643jiq-1n_annua*%i8+rq0dx9p=$n'
+SECRET_KEY = '{{secret_key}}'
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
@@ -108,6 +108,6 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    '$$$$PKG_NAME$$$$',
+    '{{app_name}}',
     'simpleapp',
 )
