@@ -2,7 +2,7 @@
 Django App Skeleton
 ===================
 
-:Version: 1.0
+:Version: 1.0.1
 :Docs: http://github.com/callowayproject/django-app-skeleton/
 :Download: http://pypi.python.org/pypi/django-app-skeleton/
 :Source: http://github.com/callowayproject/django-app-skeleton/
@@ -10,6 +10,8 @@ Django App Skeleton
 ==========
 Change Log
 ==========
+* **1.0.1**
+    * Updated example app so the code is more up to date with django
 
 * **1.0**
     * Default configuration file `.djas`
