@@ -10,6 +10,10 @@ Django App Skeleton
 ==========
 Change Log
 ==========
+
+* **1.0.2**
+    * Windows compatibility
+
 * **1.0.1**
     * Updated example app so the code is more up to date with django
 
@@ -59,7 +63,7 @@ and the script will ask you for everything it needs.
 You can specify some or all of the options when calling the script.
 
 Command-line Options
-********************
+--------------------
 
 Below are the possible commands to supplied the `create_pkg.py` script. If any
 of the values are present, no prompt will be displayed for its value.
@@ -177,3 +181,4 @@ Contributors
 * Jose Soares
 * Justin Quick
 * Adam Patterson
+* Ben Margoli
