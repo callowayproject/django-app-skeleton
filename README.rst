@@ -2,7 +2,7 @@
 Django App Skeleton
 ===================
 
-:Version: 1.0.1
+:Version: 1.0.2
 :Docs: http://github.com/callowayproject/django-app-skeleton/
 :Download: http://pypi.python.org/pypi/django-app-skeleton/
 :Source: http://github.com/callowayproject/django-app-skeleton/
