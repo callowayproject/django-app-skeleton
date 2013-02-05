@@ -26,7 +26,7 @@ def get_readme():
 DESC = 'A basic skeleton and script to make a packageable django application'
 setup(
     name="django-app-skeleton",
-    version='1.0.2',
+    version='1.0.3',
     url='https://github.com/callowayproject/django-app-skeleton',
     author='Calloway Project',
     author_email='webmaster@callowayproject.com',
