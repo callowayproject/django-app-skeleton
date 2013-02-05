@@ -9,8 +9,16 @@ import subprocess
 
 import platform
 
+
+IS_WINDOWS = False
+win32api = None
 if platform.system() == 'Windows':
-    import win32api
+    IS_WINDOWS = True
+    try:
+        import win32api
+    except (ImportError, ):
+        pass
+
 
 CONFIG_FILE = os.path.expanduser('~/.djas')
 CHARS = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
@@ -148,9 +156,9 @@ def replace(opts, text):
     we need to also replaced `app_name` folders with the supplied value.
 
     """
-    if win32api:
-        text = text.replace('\\app_name', '/{0}'.format(opts['APP_NAME']))
-        text = text.replace('\\gitignore', '/.gitignore')
+    if IS_WINDOWS:
+        text = text.replace('\\app_name', '\\{0}'.format(opts['APP_NAME']))
+        text = text.replace('\\gitignore', '\\.gitignore')
     else:
         text = text.replace('/app_name', '/{0}'.format(opts['APP_NAME']))
         text = text.replace('/gitignore', '/.gitignore')
@@ -196,10 +204,13 @@ def mk_pkg(opts, dest, templ_dir):
 
 def main(options):
     config = get_config()
-    if win32api:
+
+    cur_user = ''
+    if IS_WINDOWS and win32api:
         cur_user = win32api.GetUserName()
-    else:
+    elif not IS_WINDOWS:
         cur_user = os.getlogin()
+
     # Default options
     opts = {
         'APP_NAME': None,
