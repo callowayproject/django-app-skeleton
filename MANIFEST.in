@@ -1,5 +1,6 @@
 include create_pkg.py
 
+include create_pkg.py
 include skel/CHANGELOG
 include skel/LICENSE
 include skel/MANIFEST.in
