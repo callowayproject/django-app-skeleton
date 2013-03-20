@@ -126,7 +126,7 @@ If all you want is the `app` skeleton, you can use the following command::
 
     Our `skeleton` is a **package** skeletion, and django's
     `startapp` command expects a **app** skeletion. Therefore the path above
-    points to just out **app** skeleton.
+    points to just our **app** skeleton.
 
 
 Variable Substitution
@@ -174,6 +174,21 @@ The variables are referenced by surrounding them with ``{{``\ , such as
     In addition to `{{ .. }}`, anything with the name folder name `app_name` is
     also replaced with its correct value. This is also so make the **app**
     skeleton compatible with django's `startapp` command.
+
+
+Other Notes
+===========
+
+The supplied ``example`` (skel/app_name/example/)  application demonstrates
+how you might reference your new application within a project. To clarify,
+the project name refers to the parent directory created by ``create_pkg``
+script, if none is supplied using the ``-d`` switch, while the app name refers to
+your initial application name, development directory, etc. It is this latter
+name you will find populated, as expected, in the ``example/settings.py`` file.
+
+Note: Please don't get confused by this when using identical names for both
+project and application -- only the application name counts unless you
+intentionally change some related setting(s).
 
 
 Contributors
