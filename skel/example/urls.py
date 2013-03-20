@@ -1,8 +1,11 @@
-from django.conf.urls import patterns, include, url
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from django.conf.urls.defaults import patterns, include, url
 from django.conf import settings
 
 from django.contrib import admin
 admin.autodiscover()
+
 
 urlpatterns = patterns('',
     # Examples:
@@ -17,5 +20,4 @@ urlpatterns = patterns('',
 urlpatterns = urlpatterns + patterns('',
     (r'^static/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': settings.MEDIA_ROOT}),
-    ) if settings.DEBUG else urlpatterson
-
+    ) if settings.DEBUG else urlpatterns
