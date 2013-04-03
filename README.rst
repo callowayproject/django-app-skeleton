@@ -2,7 +2,7 @@
 Django App Skeleton
 ===================
 
-:Version: 1.0.3
+:Version: 1.0.4
 :Docs: http://github.com/callowayproject/django-app-skeleton/
 :Download: http://pypi.python.org/pypi/django-app-skeleton/
 :Source: http://github.com/callowayproject/django-app-skeleton/
@@ -10,6 +10,12 @@ Django App Skeleton
 ==========
 Change Log
 ==========
+
+* **1.0.4**
+    * Added `create_pkg.py` in the pypi package
+    * Updated app settings to take a default dictionary
+    * Commented out the logging filter from the example app
+    * Minor pep8 enhancements
 
 * **1.0.3**
     * Bug fixes
