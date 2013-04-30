@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
 {{app_name}}
@@ -10,6 +9,7 @@ __version_info__ = {
     'releaselevel': 'final',
     'serial': 1
 }
+
 
 def get_version(short=False):
     assert __version_info__['releaselevel'] in ('alpha', 'beta', 'final')

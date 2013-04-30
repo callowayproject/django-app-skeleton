@@ -28,9 +28,10 @@ BLACKLIST = (
     'admin/css',
     'admin/img',
     'admin/js',
-    '/.git/',
+    '.git/',
     '.svn',
     '.hg',
+    '.DS_Store',
 )
 
 
