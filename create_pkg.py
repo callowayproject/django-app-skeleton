@@ -80,7 +80,7 @@ def get_config():
     defaults = (
         ('author', 'PKG_AUTHOR', ''),
         ('author_email', 'PKG_AUTHOR_EMAIL', ''),
-        ('destintation_dir', 'DEST_DIR',  os.getcwd()),
+        ('destintation_dir', 'DEST_DIR', os.getcwd()),
         ('template_dir', 'TMPL_DIR', os.path.abspath(
             os.path.join(os.path.dirname(__file__), 'skel'))),
         ('use_venv', 'USE_VENV', 'n'),
@@ -125,6 +125,8 @@ def ensure_venv():
 def mk_virtual_env(name, dest):
     """Creates a virtualenv using virtualenv wrapper"""
     print 'Making the virtual environment (%s)...' % name
+    if not dest.startswith('/'):
+        dest = os.path.realpath(dest)
     create_env_cmds = [
         'source virtualenvwrapper.sh',
         'cd %s' % dest,
@@ -133,8 +135,8 @@ def mk_virtual_env(name, dest):
     ]
     create_pa_cmd = [
         'source virtualenvwrapper.sh',
-        'cat > $WORKON_HOME/%s/bin/postactivate'\
-        '<<END\n#!/bin/bash/\ncd %s\nEND\n'\
+        'cat > $WORKON_HOME/%s/bin/postactivate'
+        '<<END\n#!/bin/bash/\ncd %s\nEND\n'
         'chmod +x $WORKON_HOME/%s/bin/postactivate' % (name,
                                                        dest,
                                                        name)
@@ -296,7 +298,7 @@ if __name__ == '__main__':
     parser.add_option('-d', '--dest', dest='destination',
                       help='Where to put the new application.')
     parser.add_option('-t', '--template', dest='template',
-                      help='The application template to use as a basis for '\
+                      help='The application template to use as a basis for '
                            'the new application.')
     parser.add_option('-i', '--use-venv', dest='use_venv',
                       help='Wheater or not to create the virtuelenv')
